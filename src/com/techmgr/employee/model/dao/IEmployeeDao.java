@@ -6,4 +6,5 @@ import com.techmgr.employee.model.vo.Employee;
 
 public interface IEmployeeDao {
 	public Employee selectOneEmployee(SqlSession session, String userId, String userPwd);
+	public Employee checkId(SqlSession session,String userId);
 }

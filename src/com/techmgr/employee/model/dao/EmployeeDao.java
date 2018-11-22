@@ -20,6 +20,12 @@ public class EmployeeDao implements IEmployeeDao {
 		
 	}
 
+	@Override
+	public Employee checkId(SqlSession session, String userId) {
+		Employee emp = session.selectOne("employee.checkId", userId);
+		return emp;
+	}
+
 
 
 }

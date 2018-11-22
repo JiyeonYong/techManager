@@ -41,6 +41,19 @@ public class EmployeeService implements IEmployeeService {
 		return emp;
 	}
 
+	@Override
+	public boolean checkId(String userId) {
+		SqlSession session = getSqlSession();
+		
+		Employee emp = new EmployeeDao().checkId(session, userId);
+		
+		if(emp != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 
 
 }

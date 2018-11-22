@@ -4,4 +4,5 @@ import com.techmgr.employee.model.vo.Employee;
 
 public interface IEmployeeService {
 	public Employee selectOneEmployee(String userId, String userPwd);
+	public boolean checkId(String userId);
 }

@@ -15,5 +15,11 @@
 		where user_id = #{userId}
 		      and user_pwd = #{userPwd}
 	</select>
+	
+	<select id = "checkId" parameterType = "String" resultType = "Employee">
+		select user_id as userId 
+		from users
+		where user_id = #{userId}
+	</select>
   
 </mapper>
