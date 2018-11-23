@@ -17,6 +17,18 @@ public class Employee {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	//회원가입용 생성자
+	public Employee(String userId, String userPwd, String userName, String phone, String email, String pCode) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.pCode = pCode;
+	}
 
 	public Employee(String userId, String userPwd, String userName, String phone, String email, String pCode,
 			Date regDate, String adminType, String active) {

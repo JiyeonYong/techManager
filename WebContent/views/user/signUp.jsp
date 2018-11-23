@@ -27,7 +27,6 @@
 <div class="limiter">
 		<div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form action = "/signUp.do" id = "login100" method = "post" class="login100-form">
 					<span class="login100-form-title p-b-49">
 						Sign Up
 					</span>
@@ -36,31 +35,31 @@
 						<span class="label-input100">소속</span>
 						<br>
 						<center>
-							<select class="selectpicker test" data-live-search="true" style = "width : 75%">
+							<select name = "company" class="selectpicker test" data-live-search="true" style = "width : 75%">
 								<optgroup label="제조사">
-  								<option name = "company">제조사</option>
+  								<option value = "tmgr">제조사</option>
 								</optgroup>
 								
 								<optgroup label="협력사">
-  								<option name = "company">DBMaster</option>
-  								<option name = "company">Solutions</option>
-  								<option name = "company">BestWeb</option>
-  								<option name = "company">Designers</option>
+  								<option value = "p1">DBMaster</option>
+  								<option value = "p2">Solutions</option>
+  								<option value = "p3">BestWeb</option>
+  								<option value = "p4">Designers</option>
 								</optgroup>
 							</select>
 						</center>
 					</div>
 					
-					<div id = "validate-input" class="wrap-input100 validate-input m-b-23" data-validate="ID를 입력하세요">
+					<div id = "validate-input" class="wrap-input100 validate-input m-b-23">
 						<span class="label-input100">ID</span>
-						<input id = "idCheck" class="input100" type="text" name="userId" placeholder="아이디">
+						<input id = "userId" class="input100" type="text" name="userId" placeholder="아이디" >
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					
 					<div class="text-left p-t-8 p-b-31">
-						<a>
+						<button type = "button" id = "checkIdBtn" class = "btn btn-primary btn-sm">
 							중복 확인 >
-						</a>
+						</button>
 						<span id="checkIdMsg"></span>
 					</div>
 					
@@ -81,26 +80,26 @@
 					
 					<div id = "validate-input" class="wrap-input100 validate-input m-b-23">
 						<span class="label-input100">Name</span>
-						<input class="input100" type="text" name="userName" placeholder="이름">
+						<input id = "userName" class="input100" type="text" name="userName" placeholder="이름">
 						<span class="focus-input100" data-symbol="&#9999;"></span>
 					</div>
 					
 					<div id = "validate-input" class="wrap-input100 validate-input m-b-23">
 						<span class="label-input100">Phone</span>
-						<input class="input100" type="text" name="phone" placeholder="전화번호 (형식 : 01088881111)">
+						<input id = "phone" class="input100" type="text" name="phone" placeholder="전화번호 (형식 : 01088881111)">
 						<span class="focus-input100" data-symbol="&#9742;"></span>
 					</div> 
 					
 					<div id = "validate-input" class="wrap-input100 validate-input m-b-23">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="email" name="email" placeholder="이메일">
+						<input id = "email" class="input100" type="email" name="email" placeholder="이메일">
 						<span class="focus-input100" data-symbol="&#9993;"></span>
 					</div>
 					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button id = "signUpBtn" type = "submit" class="login100-form-btn">
+							<button id = "enrollBtn" type = "submit"  class="login100-form-btn">
 								회원가입
 							</button>
 						</div>
@@ -118,7 +117,6 @@
 							홈으로
 						</a>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -129,23 +127,21 @@
 	
 	<script>
 		$(function() {
-			$("#signUpBtn").click(function(){
+			$("#enrollBtn").click(function(){
 				var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 			    var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
-			    var getName= RegExp(/^[가-힣]+$/);
+			    var getPhone = RegExp(/^[0-9]{11}$/);
+			    var pCode = $("select[name=company]").val();
+			    var userId = $("#userId").val();
+				var userPwd = $("#userPwd").val();
+				var userName = $("#userName").val();
+				var phone = $("#phone").val();
+				var email = $("#email").val();
 				
 			    //아이디 공백 확인
 			      if($("#userId").val() == ""){
 			        alert("아이디를 입력해주세요.");
 			        $("#userId").focus();
-			        return false;
-			      }
-			 
-			      //이름의 유효성 검사
-			      if(!getCheck.test($("#userName").val())){
-			        alert("이름을 다시 확인해주세요.");
-			        $("#userName").val("");
-			        $("#userName").focus();
 			        return false;
 			      }
 			 
@@ -160,18 +156,34 @@
 			      //아이디랑 비밀번호랑 같은지
 			      if ($("#userId").val()==($("#userPwd").val())) {
 			      alert("비밀번호와 아이디가 같습니다. ");
-			      $("#tbPwd").val("");
-			      $("#tbPwd").focus();
+			      $("#userPwd").val("");
+			      $("#userPwd").focus();
+			      return false;
 			    }
 			 
 			      //비밀번호 똑같은지
 			      if($("#userPwd").val() != ($("#checkUserPwd").val())){ 
 			      alert("입력한 비밀번호가 다릅니다.");
-			      $("#tbPwd").val("");
-			      $("#cpass").val("");
-			      $("#tbPwd").focus();
+			      $("#userPwd").val("");
+			      $("#checkUserPwd").val("");
+			      $("#checkUserPwd").focus();
 			      return false;
 			     }
+			      
+			    //전화번호 공백 확인
+			      if($("#phone").val() == ""){
+			        alert("전화번호를 입력해주세요");
+			        $("#phone").focus();
+			        return false;
+			      }
+			           
+			      //전화번호 유효성 검사
+			      if(!getPhone.test($("#phone").val())){
+			        alert("전화번호 11자리 숫자만 입력해주세요.")
+			        $("#phone").val("");
+			        $("#phone").focus();
+			        return false;
+			      }
 			 
 			     //이메일 공백 확인
 			      if($("#email").val() == ""){
@@ -187,44 +199,32 @@
 			        $("#email").focus();
 			        return false;
 			      }
-			 
-			      //이름 유효성
-			      if (!getName.test($("#userName").val())) {
-			        alert("이름 똑띠 쓰세용");
-			        $("#userName").val("");
-			        $("#userName").focus();
-			        return false;
-			      }
-			 
-			    return true;
-				
-				
-				/* $.ajax({
-					url : "/login.do",
-					data : {userId:userId, userPwd:userPwd},
+			    
+			    $.ajax({
+					url : "/enroll.do",
 					type : "post",
-					success : function(isEmployee){
-						if(isEmployee == "1"){
-							alert("로그인 성공");
+					data : {pCode:pCode,userId:userId,userPwd:userPwd,userName:userName,email:email,phone:phone},
+					success : function(result){
+						if(result==1){
+							alert("회원가입 완료");
 						}
-						else if(isEmployee == "0"){
-							$("#userId").val("");
+						else if(result==0){
+							alert("회원가입 실패");
 							$("#userPwd").val("");
 						}
-					},
+					} ,
 					error : function(){
-						alert("문제가 발생했습니다.");
+						alert("문제가 발생하였습니다. 지속적으로 문제 발생 시 관리자에게 문의 바랍니다.");
 					}
-					
-				}); */
+				});
 				
 			});
 		});
 	</script>
 	
 	<script>
-	$("#idCheck").blur(function(){
-		var userId = $("#idCheck").val();
+	$("#checkIdBtn").click(function(){
+		var userId = $("#userId").val();
 		var msg = $("#checkIdMsg");
 		var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
 		$.ajax({
@@ -232,16 +232,16 @@
 			type : "get",
 			data : {userId:userId},
 			success : function(isUserId){
-			var isUserId = isUserId;
 			if(isUserId == "true") {
                 msg.attr("style","color:red");
-				msg.html("ID사용 불가");
-			} 
-			else if(isUserid == "false" && ){
+				msg.html("  ID 중복 입니다.");
+			}else if(!getCheck.test(userId)){
+				msg.attr("style","color:red");
+				msg.html("  ID 양식에 맞지 않습니다.");
+			}else if(isUserId == "false" && getCheck.test(userId)){
                	msg.attr("style","color:blue");
-				msg.html("ID사용 가능");
+				msg.html("  ID 사용 가능");
 			}
-				
 				
 			},
 			error : function(){console.log("ajax 통신 에러");}

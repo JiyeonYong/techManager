@@ -26,6 +26,13 @@ public class EmployeeDao implements IEmployeeDao {
 		return emp;
 	}
 
+	@Override
+	public int insertOneEmployee(SqlSession session, Employee employee) {
+		int result = session.insert("employee.insertOneEmployee", employee);
+		System.out.println(result);
+		return result;
+	}
+
 
 
 }

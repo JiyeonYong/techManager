@@ -13,11 +13,10 @@ import com.techmgr.employee.model.vo.Employee;
 
 public class EmployeeService implements IEmployeeService {
 
-	
 	private SqlSession getSqlSession() {
 		SqlSession session = null;
 		String resource = "/mybatis-config.xml";
-		
+
 		try {
 			InputStream is = Resources.getResourceAsStream(resource);
 			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
@@ -27,33 +26,48 @@ public class EmployeeService implements IEmployeeService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return session;
 	}
-	
+
 	@Override
 	public Employee selectOneEmployee(String userId, String userPwd) {
 		SqlSession session = getSqlSession();
-		
+
 		Employee emp = new EmployeeDao().selectOneEmployee(session, userId, userPwd);
 		session.close();
-		
+
 		return emp;
 	}
 
 	@Override
 	public boolean checkId(String userId) {
 		SqlSession session = getSqlSession();
-		
+
 		Employee emp = new EmployeeDao().checkId(session, userId);
-		
-		if(emp != null) {
+
+		if (emp != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
+	@Override
+	public int insertOneEmployee(Employee employee) {
+		SqlSession session = getSqlSession();
 
+		int result = new EmployeeDao().insertOneEmployee(session, employee);
+
+		if (result > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+
+		session.close();
+
+		return result;
+	}
 
 }

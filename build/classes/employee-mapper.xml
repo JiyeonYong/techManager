@@ -21,5 +21,9 @@
 		from users
 		where user_id = #{userId}
 	</select>
+	
+	<insert id = "insertOneEmployee" parameterType="Employee">
+		insert into users values(#{userId}, #{userPwd}, #{userName}, #{phone}, #{email}, #{pCode}, sysdate, null, 'y')
+	</insert>
   
 </mapper>
