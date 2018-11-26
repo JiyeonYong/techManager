@@ -22,7 +22,6 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form action = "/login.do" id = "login100" method = "post" class="login100-form">
 					<span class="login100-form-title p-b-49">
 						Tech Manager
 					</span>
@@ -68,7 +67,6 @@
 							회원가입
 						</a>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -94,10 +92,12 @@
 					data : {userId:userId, userPwd:userPwd},
 					type : "post",
 					success : function(isEmployee){
+						
 						if(isEmployee == "1"){
-							alert("로그인 성공");
-						}
-						else if(isEmployee == "0"){
+							location.href = "/noticeList.do";
+							
+						}else if(isEmployee == "0"){
+							alert("아이디 / 비밀번호를 다시 확인해주세요!");
 							$("#userId").val("");
 							$("#userPwd").val("");
 						}
@@ -105,9 +105,7 @@
 					error : function(){
 						alert("문제가 발생했습니다.");
 					}
-					
 				});
-				
 			});
 		});
 	</script>

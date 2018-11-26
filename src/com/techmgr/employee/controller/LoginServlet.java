@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.techmgr.employee.model.service.EmployeeService;
 import com.techmgr.employee.model.vo.Employee;
@@ -41,16 +42,15 @@ public class LoginServlet extends HttpServlet {
 		String isEmployee;
 		
 		if(emp!= null) {
-			/*RequestDispatcher view = request.getRequestDispatcher("index.html");
-			request.setAttribute("employee", emp);
-			view.forward(request, response);*/
-			
 			isEmployee = "1";
+			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("employee", emp);
 			
 		}else {
 			isEmployee = "0";
 		}
-		
+
 		response.getWriter().print(isEmployee);
 	}
 

@@ -207,6 +207,7 @@
 					success : function(result){
 						if(result==1){
 							alert("회원가입 완료");
+							location.href("/index.html");
 						}
 						else if(result==0){
 							alert("회원가입 실패");
