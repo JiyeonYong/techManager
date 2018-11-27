@@ -52,6 +52,8 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		response.getWriter().print(isEmployee);
+		
+		System.out.println(isEmployee);
 	}
 
 	/**

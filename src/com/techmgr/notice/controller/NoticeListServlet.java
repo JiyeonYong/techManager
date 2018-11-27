@@ -31,7 +31,8 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*int currentPage;
+		
+		int currentPage;
 		
 		if(request.getParameter("currentPage") == null) {
 			currentPage = 1;
@@ -47,17 +48,7 @@ public class NoticeListServlet extends HttpServlet {
 			view.forward(request, response);
 		} else {
 			response.sendRedirect("/views/notice/error.jsp");
-		}*/
-		
-		int numPerPage = 10;
-		int requestPage;
-		
-		if(request.getParameter("requestPage") == null) {
-			requestPage = 1;
-		}else {
-			requestPage = Integer.parseInt(request.getParameter("requestPage"));
 		}
-		
 		
 	}
 
