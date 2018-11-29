@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "notice">
+ 	<insert id = "insertNotice" parameterType="Notice">
+		insert into notice_board values(boardNo.nextval, #{title}, #{contents}, #{authorId}, #{comments}, #{views}, sysdate)
+	</insert>
+	
+	<select id = "selectLastNoticeId" resultType="Integer">
+		select max(id) from notice_board
+	</select>
+</mapper>

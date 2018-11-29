@@ -15,6 +15,16 @@ public class Notice {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	//insert 용 생성자
+	public Notice(String title, String contents, String authorId) {
+		super();
+		this.title = title;
+		this.contents = contents;
+		this.authorId = authorId;
+		this.comments = 0;
+		this.views = 0;
+	}
 
 	public Notice(int noticeId, String title, String contents, String authorId, int comments, int views, Date regDate) {
 		super();
@@ -36,7 +46,7 @@ public class Notice {
 	}
 
 	public String getTitle() {
-		return title;
+		return title; 
 	}
 
 	public void setTitle(String title) {

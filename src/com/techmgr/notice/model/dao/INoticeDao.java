@@ -2,13 +2,14 @@ package com.techmgr.notice.model.dao;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
-
+import com.techmgr.file.model.vo.FileData;
 import com.techmgr.notice.model.vo.Notice;
 
 
-public interface INoticeListDao {
+public interface INoticeDao {
 	public ArrayList<Notice> getCurrentPage(int currentPage, int recordCountPerPage, Connection conn);
 	public String getPageNavi(int currentPage, int recordCountPerPage, int naviCountPerPage, Connection conn);
+	public int insertNotice(Connection conn, Notice notice);
 }

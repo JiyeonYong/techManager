@@ -29,14 +29,14 @@
 
 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
 	<%@ include file = "/views/layout/slide_menu.jsp" %>
+	
+	
 	<main role = "main" class = "col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 		<center>
 		<div class = "container">
 			<% if(employee.getUserId().equals("hp_admin") || employee.getUserId().equals("supplier_admin")) {%>
-			<button class = "btn btn-primary float-right" onclick= "window.location.href='/views/notice/noticeWrite.jsp'">글쓰기</button>
-			<br><br>
+			
 			
 			<%} %>
 			
@@ -65,6 +65,9 @@
 			<%}%>
 			</tbody>
 		</table>
+		<button class = "btn btn-success float-right btn-sm" onclick= "window.location.href='/views/notice/noticeWrite.jsp'">글쓰기</button>
+		
+		<br>
 		
 		<ul class = "pagination justify-content-center" style="margin:20px">
 			<%=pageNavi %>

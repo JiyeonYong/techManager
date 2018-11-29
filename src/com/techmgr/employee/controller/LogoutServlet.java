@@ -1,28 +1,24 @@
-package com.techmgr.notice.controller;
+package com.techmgr.employee.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.techmgr.notice.model.service.NoticeService;
-import com.techmgr.notice.model.vo.PageData;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet(name = "NoticeList", urlPatterns = { "/noticeList.do" })
-public class NoticeListServlet extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = { "/logout.do" })
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +27,11 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		
-		int currentPage;
-		
-		if(request.getParameter("currentPage") == null) {
-			currentPage = 1;
-		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		PageData pd = new NoticeService().selectAllNotice(currentPage);
-		
-		if(pd != null) {
-			RequestDispatcher view  = request.getRequestDispatcher("views/notice/noticeList.jsp");
-			request.setAttribute("pageData", pd);
-			view.forward(request, response);
-		} else {
-			response.sendRedirect("/views/notice/error.jsp");
+		if(session != null) {
+			session.invalidate();
+			response.sendRedirect("/index.html");
 		}
 		
 	}
@@ -61,4 +45,3 @@ public class NoticeListServlet extends HttpServlet {
 	}
 
 }
- 

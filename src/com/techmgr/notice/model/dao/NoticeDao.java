@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.techmgr.common.JDBCTemplate;
+import com.techmgr.file.model.vo.FileData;
 import com.techmgr.notice.model.vo.Notice;
 
-public class NoticeListDao implements INoticeListDao {
+public class NoticeDao implements INoticeDao {
 
 	@Override
 	public ArrayList<Notice> getCurrentPage(int currentPage, int recordCountPerPage, Connection conn) {
@@ -145,6 +148,33 @@ public class NoticeListDao implements INoticeListDao {
 
 		return sb.toString();
 
+	}
+
+	@Override
+	public int insertNotice(Connection conn, Notice notice) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into notice_board values(boardNo.nextval, ?, ?, ?, ?, ?, sysdate)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, notice.getTitle());
+			pstmt.setString(2, notice.getContents());
+			pstmt.setString(3, notice.getAuthorId());
+			pstmt.setInt(4, notice.getComments());
+			pstmt.setInt(5, notice.getViews());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.Close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

@@ -5,8 +5,15 @@
 	href="/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 
+
+
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Tech Manager</a>
+	<a class="navbar-brand col-sm-8 col-md-2 mr-0" href="#">Tech Manager</a>
+	<%if(session.getAttribute("employee") != null) {%>
+	<div class = "nav-item">
+		<a class = " col-sm-3 col-md-2 mr-0" href= "/logout.do">로그아웃</a>
+	</div>
+	<%} %>
 </nav>
 
 <div class="container-fluid">

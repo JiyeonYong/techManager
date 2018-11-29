@@ -4,6 +4,22 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ 
+ /* ===========
+   Form Uploads
+ =============*/
+.dropzone {
+  min-height: 230px;
+  border: 2px dashed #485561;
+  border-radius: 6px;
+  background-color: #36404a;
+}
+
+.dropzone .dz-message {
+  font-size: 30px;
+}
+ 
+ 
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
