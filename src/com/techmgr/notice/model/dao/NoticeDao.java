@@ -153,7 +153,7 @@ public class NoticeDao implements INoticeDao {
 	@Override
 	public int insertNotice(Connection conn, Notice notice) {
 		PreparedStatement pstmt = null;
-		int result = 0;
+		int noticeInsertResult = 0;
 		
 		String query = "insert into notice_board values(boardNo.nextval, ?, ?, ?, ?, ?, sysdate)";
 		
@@ -166,7 +166,64 @@ public class NoticeDao implements INoticeDao {
 			pstmt.setInt(4, notice.getComments());
 			pstmt.setInt(5, notice.getViews());
 			
+			noticeInsertResult = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.Close(pstmt);
+		}
+		
+		return noticeInsertResult;
+	}
+
+	@Override
+	public Notice selectOneNotice(Connection conn, int noticeId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice notice = null;
+		
+		String query = "select * from notice_board where id =?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				notice = new Notice();
+				
+				notice.setNoticeId(rset.getInt("id"));
+				notice.setTitle(rset.getString("title"));
+				notice.setContents(rset.getString("contents"));
+				notice.setAuthorId(rset.getString("author_id"));
+				notice.setComments(rset.getInt("comments"));
+				notice.setViews(rset.getInt("views"));
+				notice.setRegDate(rset.getDate("reg_date"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return notice;
+	}
+
+	public int updateView(Connection conn, int views, int id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update notice_board set views = ? where id =?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, views);
+			pstmt.setInt(2, id);
+			
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

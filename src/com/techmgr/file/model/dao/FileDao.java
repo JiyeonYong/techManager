@@ -16,7 +16,7 @@ public class FileDao implements IFileDao{
 		PreparedStatement pstmt = null;
 		int fileResult = 0;
 		
-		String query = "fileNo.nextval, ?, ?, ?, ?, sysdate, boardNo.currval";
+		String query = "insert into files values(fileNo.nextval, ?, ?, ?, ?, sysdate, boardNo.currval)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			

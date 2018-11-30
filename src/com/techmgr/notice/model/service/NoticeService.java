@@ -64,18 +64,12 @@ public class NoticeService implements INoticeService {
 	}
 
 	@Override
-	public int insertNotice(Notice notice, FileData fd) {
+	public int insertNotice(Notice notice) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int contentsResult = new NoticeDao().insertNotice(conn, notice);
+		int noticeInsertResult = new NoticeDao().insertNotice(conn, notice);
 		
-		int fileResult = 0;
-		
-		if(contentsResult > 0 && fd != null) {
-			fileResult = new FileDao().uploadFile(conn, fd);
-		}
-		
-		if(contentsResult > 0) {
+		if(noticeInsertResult > 0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -83,7 +77,31 @@ public class NoticeService implements INoticeService {
 		
 		JDBCTemplate.Close(conn);
 		
-		return contentsResult;
+		return noticeInsertResult;
+	}
+
+	@Override
+	public Notice selectOneNotice(int noticeId) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Notice notice = new NoticeDao().selectOneNotice(conn, noticeId);
+		
+		if(notice != null) {
+			int views = notice.getViews();
+			int id = notice.getNoticeId();
+			views++;
+			int result = new NoticeDao().updateView(conn, views, id);
+			
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+		
+		JDBCTemplate.Close(conn);
+		
+		return notice;
 	}
 
 }

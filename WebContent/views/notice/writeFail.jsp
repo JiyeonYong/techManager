@@ -4,10 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>공지사항 에러</title>
+<title>공지사항 작성 실패</title>
 </head>
 <body>
-	공지사항을 불러오는데 실패했습니다!
-	
+	<script src = "/js/bootbox.min.js"></script>
+	<script>
+		bootbox.prompt({
+	    	message: "공지사항 작성이 실패했습니다. 다시 작성해주세요.",
+	    	size: 'small'
+		});
+
+    	location.href="/noticeList.do"
+	</script>
 </body>
 </html>

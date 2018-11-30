@@ -17,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import com.techmgr.employee.model.vo.Employee;
+import com.techmgr.file.model.service.FileService;
 import com.techmgr.file.model.vo.FileData;
 import com.techmgr.notice.model.service.NoticeService;
 import com.techmgr.notice.model.vo.Notice;
@@ -44,12 +45,7 @@ public class NoticeWriteServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		
-		//글
 		String userId = ((Employee)session.getAttribute("employee")).getUserId();
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		
-		Notice notice = new Notice(title, contents, userId);
 		
 		//첨부파일
 		int fileSizeLimit = 5*1024*1024;
@@ -59,6 +55,7 @@ public class NoticeWriteServlet extends HttpServlet {
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, fileSizeLimit, encType, new DefaultFileRenamePolicy());
 		
 		String fileName = multi.getFilesystemName("uploadFile");
+		System.out.println(fileName);
 		String fullFilePath = uploadPath + "\\" + fileName;
 		
 		File file = new File(fullFilePath);
@@ -71,13 +68,22 @@ public class NoticeWriteServlet extends HttpServlet {
 		
 		FileData fd = null;
 		
-		if(fileName.equals("")) {
+		if(fileName != null) {
 			fd = new FileData(fileName, fullFilePath, fileSize, userId, uploadTime);
+			new FileService().uploadFile(fd);
 		}
 		
-		int insertResult = new NoticeService().insertNotice(notice, fd);
+		//글
+		String title = multi.getParameter("title");
+		String contents = multi.getParameter("contents");
 		
-		if(insertResult > 0) {
+			
+		Notice notice = new Notice(title, contents, userId);
+				
+		
+		int noticeInsertResult = new NoticeService().insertNotice(notice);
+		
+		if(noticeInsertResult > 0) {
 			response.sendRedirect("/views/notice/writeSuccess.jsp");
 		}else {
 			response.sendRedirect("/views/notice/writeFail.jsp");

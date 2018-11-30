@@ -6,5 +6,6 @@ import com.techmgr.notice.model.vo.PageData;
 
 public interface INoticeService {
 	public PageData selectAllNotice(int currentPage);
-	public int insertNotice(Notice notice, FileData fd);
+	public int insertNotice(Notice notice);
+	public Notice selectOneNotice(int noticeId);
 }

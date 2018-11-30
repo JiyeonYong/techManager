@@ -50,7 +50,7 @@
 			<%for(Notice n : list){%>
 				<tr>
 					<td><%=n.getNoticeId() %></td>
-					<td><b><%=n.getTitle() %></b></td>
+					<td><a href="notice.do?noticeId=<%=n.getNoticeId() %>"><b><%=n.getTitle() %></b></a></td>
 					
 					<% if(n.getAuthorId().equals("hp_admin")) {%>
 						<td>홈페이지 관리자</td>

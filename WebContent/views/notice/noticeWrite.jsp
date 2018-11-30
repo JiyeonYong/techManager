@@ -28,9 +28,12 @@
 		<br>
 		<h6>공지사항 작성</h6>
 		<br>
-		<form action = "/noticeWrite.do" method="post" onsubmit="return checkExt()" enctype = "multipart/form-data">
+		
+		<form action = "/noticeWrite.do" method="post" enctype = "multipart/form-data">
 		<div class="card">
+		
 			<div class="card-body">
+			
 				<table class= "table table-brdered">
 					<tbody>
 						<tr>
@@ -57,8 +60,9 @@
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
-
+			
 			<div class="card-footer">
 				<center>
 					<input class="btn btn-secondary btn-sm float-left" type="button"
@@ -69,9 +73,11 @@
 					</div>
 				</center>
 			</div>
+			
 		</div>
 		
-			</form>
+		</form>
+		
 
 	</center>
 	</main>
@@ -98,16 +104,16 @@
 		});
 		
 		
-		function checkExt() {
+		/* function checkExt() {
 			var fileExt = $('.upload-name').val().slice($('.upload-name').val().indexOf(".") + 1).toLowerCase();
 			
-			if(fileExt != "docx" && fileExt != "jpg" && fileExt != "png" && fileExt != "hwp" && fileExt != "zip" && fileExt != "txt" && fileExt==""){
+			if(fileExt != "docx" && fileExt != "jpg" && fileExt != "png" && fileExt != "hwp" && fileExt != "zip" && fileExt != "txt"){
 				alert("일반문서, 이미지, zip 파일만 첨부할 수 있습니다.");
 				return false;
 			}
 			
 			return true;
-		}
+		} */
 		
 	</script>
 
