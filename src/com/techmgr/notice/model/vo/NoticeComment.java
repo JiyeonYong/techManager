@@ -3,8 +3,8 @@ package com.techmgr.notice.model.vo;
 import java.sql.Date;
 
 public class NoticeComment {
-	private int noticeCommentId;
-	private int noticeId;
+	private int id;
+	private int noticeBoardId;
 	private String comments;
 	private String authorId;
 	private String pCode;
@@ -15,31 +15,30 @@ public class NoticeComment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NoticeComment(int noticeCommentId, int noticeId, String comments, String authorId, String pCode,
-			Date regDate) {
+	public NoticeComment(int id, int noticeBoardId, String comments, String authorId, String pCode, Date regDate) {
 		super();
-		this.noticeCommentId = noticeCommentId;
-		this.noticeId = noticeId;
+		this.id = id;
+		this.noticeBoardId = noticeBoardId;
 		this.comments = comments;
 		this.authorId = authorId;
 		this.pCode = pCode;
 		this.regDate = regDate;
 	}
 
-	public int getNoticeCommentId() {
-		return noticeCommentId;
+	public int getId() {
+		return id;
 	}
 
-	public void setNoticeCommentId(int noticeCommentId) {
-		this.noticeCommentId = noticeCommentId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getNoticeId() {
-		return noticeId;
+	public int getNoticeBoardId() {
+		return noticeBoardId;
 	}
 
-	public void setNoticeId(int noticeId) {
-		this.noticeId = noticeId;
+	public void setNoticeBoardId(int noticeBoardId) {
+		this.noticeBoardId = noticeBoardId;
 	}
 
 	public String getComments() {

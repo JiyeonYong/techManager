@@ -68,10 +68,6 @@ public class NoticeWriteServlet extends HttpServlet {
 		
 		FileData fd = null;
 		
-		if(fileName != null) {
-			fd = new FileData(fileName, fullFilePath, fileSize, userId, uploadTime);
-			new FileService().uploadFile(fd);
-		}
 		
 		//글
 		String title = multi.getParameter("title");
@@ -83,15 +79,17 @@ public class NoticeWriteServlet extends HttpServlet {
 		
 		int noticeInsertResult = new NoticeService().insertNotice(notice);
 		
+
+		if(fileName != null) {
+			fd = new FileData(fileName, fullFilePath, fileSize, userId, uploadTime);
+			new FileService().uploadFile(fd);
+		} 
+		
 		if(noticeInsertResult > 0) {
 			response.sendRedirect("/views/notice/writeSuccess.jsp");
 		}else {
 			response.sendRedirect("/views/notice/writeFail.jsp");
 		}
-		
-		
-		
-		
 	}
 
 	/**

@@ -34,6 +34,7 @@
 	
 	<main role = "main" class = "col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 		<center>
+		<br><b><h5>공지사항</h5></b><br>
 		<div class = "container">
 			<% if(employee.getUserId().equals("hp_admin") || employee.getUserId().equals("supplier_admin")) {%>
 			
@@ -74,14 +75,6 @@
 		</ul>
 		</div>
 		
-		
-		
-		
-		
-		<form style = "display:inline" action = "/noticeSearch.do" method = "get">
-			<input type = "text" name = "search"/>
-			<input type = "submit" value = "검색"/>
-		</form>
 		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		

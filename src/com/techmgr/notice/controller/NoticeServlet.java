@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.techmgr.file.model.service.FileService;
+import com.techmgr.file.model.vo.FileData;
 import com.techmgr.notice.model.service.NoticeService;
 import com.techmgr.notice.model.vo.Notice;
+import com.techmgr.notice.model.vo.NoticeData;
 
 /**
  * Servlet implementation class NoticeServlet
@@ -35,11 +38,14 @@ public class NoticeServlet extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("noticeId"));
 		
-		Notice notice = new NoticeService().selectOneNotice(id);
+		NoticeData nd = new NoticeService().selectOneNotice(id);
 		
-		if(notice != null) {
+		FileData fd = new FileService().selectOneFile(id);
+		
+		if(nd != null) {
 			RequestDispatcher view = request.getRequestDispatcher("views/notice/notice.jsp");
-			request.setAttribute("notice", notice);
+			request.setAttribute("fileData", fd);
+			request.setAttribute("noticeData", nd);
 			view.forward(request, response);
 		} else {
 			response.sendRedirect("views/notice/error.jsp");

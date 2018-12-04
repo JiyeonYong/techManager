@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" type="text/css"
-	href="/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 
 
 
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-	<a class="navbar-brand col-sm-8 col-md-2 mr-0" href="#">Tech Manager</a>
+	<a class="navbar-brand col-sm-8 col-md-2 mr-0" href="/noticeList.do">Tech Manager</a>
 	<%if(session.getAttribute("employee") != null) {%>
 	<div class = "nav-item">
 		<a class = " col-sm-3 col-md-2 mr-0" href= "/logout.do">로그아웃</a>
@@ -22,13 +21,13 @@
 			<div class="sidebar-sticky">
 				<ul class="nav flex-column">
 					<li class="nav-item"><a class="nav-link active"
-						href="/views/pages/main-board.jsp"> <span data-feather="home"></span>
+						href="/noticeList.do"> <span data-feather="home"></span>
 							공지사항 <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/index.html">
+					<li class="nav-item"><a class="nav-link" href="/views/support/supportList.jsp">
 							<span data-feather="file"></span> 기술지원
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"> <span
+					<li class="nav-item"><a class="nav-link" href="/views/share/shareList.jsp"> <span
 							data-feather="file"></span> 기술공유
 					</a></li>
 				</ul>
@@ -38,7 +37,7 @@
 					<span>관리</span>
 				</h6>
 				<ul class="nav flex-column mb-2">
-					<li class="nav-item"><a class="nav-link" href="#"> <span
+					<li class="nav-item"><a class="nav-link" href="/views/user/enterUserInfo.jsp"> <span
 							data-feather="file-text"></span> 마이페이지
 					</a></li>
 					<li class="nav-item" ><a class="nav-link" href="#" style = "visibility:hidden" id = "adminPage"> <span

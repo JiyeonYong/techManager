@@ -21,4 +21,26 @@ public class FileService {
 		
 		return fileInsertResult;
 	}
+
+	public FileData selectOneFile(int id) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		FileData fd = new FileDao().selectOneFile(conn, id);
+		
+		JDBCTemplate.Close(conn);
+		
+		return fd;
+	}
+
+	public FileData fileDownload(String fileName, String userId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		FileData fd = new FileDao().fileDownload(fileName, userId, conn);
+		
+		JDBCTemplate.Close(conn);
+		
+		
+		return fd;
+	}
 }

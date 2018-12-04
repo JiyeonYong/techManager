@@ -7,3 +7,4 @@ import com.techmgr.file.model.vo.FileData;
 public interface IFileDao {
 	public int uploadFile(Connection conn, FileData fd);
 }
+ 

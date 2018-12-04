@@ -2,12 +2,14 @@ package com.techmgr.employee.model.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.techmgr.common.JDBCTemplate;
 import com.techmgr.employee.model.dao.EmployeeDao;
 import com.techmgr.employee.model.vo.Employee;
 
@@ -67,6 +69,22 @@ public class EmployeeService implements IEmployeeService {
 
 		session.close();
 
+		return result;
+	}
+
+	public int updateUser(String userId, String userPwd, String phone, String email) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new EmployeeDao().updateUser(conn, userId, userPwd, phone, email);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.Close(conn);
+		
 		return result;
 	}
 
