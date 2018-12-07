@@ -67,11 +67,11 @@
 				data : {userId:userId, userPwd:userPwd},
 				type : "post",
 				success : function(isUser){
-					if(isUser==1){
+					if(isUser == 1){
 						alert("본인 확인 완료되었습니다.");
 						location.href="/views/user/userInfo.jsp";
 						
-					}else if(isUser==0){
+					}else {
 						alert("본인 확인에 실패했습니다. 비밀번호를 확인해주세요.");
 						location.reload();
 					}

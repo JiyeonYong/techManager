@@ -6,6 +6,7 @@
 	<typeAlias type="com.techmgr.employee.model.vo.Employee" alias="Employee"/>
 	<typeAlias type="com.techmgr.file.model.vo.FileData" alias="FileData"/>
 	<typeAlias type="com.techmgr.notice.model.vo.Notice" alias="Notice"/>
+	<typeAlias type="com.techmgr.share.model.vo.Share" alias="Share"/>
 </typeAliases>
 
 <environments default="development">
@@ -24,6 +25,7 @@
 	<mapper resource = "/employee-mapper.xml"/>
 	<mapper resource = "/file-mapper.xml"/>
 	<mapper resource = "/notice-mapper.xml"/>
+	<mapper resource = "/share-mapper.xml"/>
 </mappers>
 
 </configuration>

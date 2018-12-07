@@ -1,27 +1,30 @@
-package com.techmgr.employee.controller;
+package com.techmgr.share.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.techmgr.employee.model.service.EmployeeService;
-import com.techmgr.employee.model.vo.Employee;
+import com.techmgr.file.model.service.FileService;
+import com.techmgr.file.model.vo.FileData;
+import com.techmgr.share.model.service.ShareService;
+import com.techmgr.share.model.vo.ShareData;
 
 /**
- * Servlet implementation class CheckUserServlet
+ * Servlet implementation class NoticeServlet
  */
-@WebServlet(name = "CheckUser", urlPatterns = { "/checkUser.do" })
-public class CheckUserServlet extends HttpServlet {
+@WebServlet(name = "Share", urlPatterns = { "/share.do" })
+public class ShareServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckUserServlet() {
+    public ShareServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +35,20 @@ public class CheckUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		int id = Integer.parseInt(request.getParameter("shareId"));
 		
-		Employee emp = new EmployeeService().selectOneEmployee(userId, userPwd);
-	
-		int isUser = 0;
+		ShareData sd = new ShareService().selectOneShare(id);
 		
-		if(emp != null) {
-			isUser = 1; //해당 유저 존재함
-		} 
+		FileData fd = new FileService().selectOneFile(id);
 		
-		response.getWriter().print(isUser);
-		
+		if(sd != null) {
+			RequestDispatcher view = request.getRequestDispatcher("views/share/share.jsp");
+			request.setAttribute("fileData", fd);
+			request.setAttribute("shareData", sd);
+			view.forward(request, response);
+		} else {
+			response.sendRedirect("views/share/error.jsp");
+		}
 	}
 
 	/**

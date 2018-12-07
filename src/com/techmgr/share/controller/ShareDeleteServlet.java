@@ -1,4 +1,4 @@
-package com.techmgr.employee.controller;
+package com.techmgr.share.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.techmgr.employee.model.service.EmployeeService;
-import com.techmgr.employee.model.vo.Employee;
+import com.techmgr.share.model.service.ShareService;
+
 
 /**
- * Servlet implementation class CheckUserServlet
+ * Servlet implementation class NoticeDeleteServlet
  */
-@WebServlet(name = "CheckUser", urlPatterns = { "/checkUser.do" })
-public class CheckUserServlet extends HttpServlet {
+@WebServlet(name = "ShareDelete", urlPatterns = { "/shareDelete.do" })
+public class ShareDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckUserServlet() {
+    public ShareDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +29,16 @@ public class CheckUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("shareId"));
+		String authorId = request.getParameter("authorId");
 		
+		int result = new ShareService().deleteOneShare(id, authorId);
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-		
-		Employee emp = new EmployeeService().selectOneEmployee(userId, userPwd);
-	
-		int isUser = 0;
-		
-		if(emp != null) {
-			isUser = 1; //해당 유저 존재함
-		} 
-		
-		response.getWriter().print(isUser);
-		
+		if(result > 0) {
+			response.sendRedirect("views/share/shareDeleteSuccess.jsp");
+		}else {
+			response.sendRedirect("/share.do?shareId="+id);
+		}
 	}
 
 	/**

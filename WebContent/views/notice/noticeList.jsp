@@ -23,9 +23,9 @@
 <title>공지사항</title>
 </head>
 <body>
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="vendor/bootstrap/js/popper.min.js"></script>
-	<script src="vender/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/vendor/bootstrap/js/popper.min.js"></script>
+	<script src="/vender/bootstrap/js/bootstrap.min.js"></script>
 
 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -36,10 +36,7 @@
 		<center>
 		<br><b><h5>공지사항</h5></b><br>
 		<div class = "container">
-			<% if(employee.getUserId().equals("hp_admin") || employee.getUserId().equals("supplier_admin")) {%>
 			
-			
-			<%} %>
 			
 			<table class = "table table-hover">
 			<thead>
@@ -66,7 +63,12 @@
 			<%}%>
 			</tbody>
 		</table>
-		<button class = "btn btn-success float-right btn-sm" onclick= "window.location.href='/views/notice/noticeWrite.jsp'">글쓰기</button>
+		
+		<% if(employee.getUserId().equals("hp_admin") || employee.getUserId().equals("supplier_admin")) {%>
+			<button class = "btn btn-success float-right btn-sm" onclick= "window.location.href='/views/notice/noticeWrite.jsp'">글쓰기</button>	
+			
+			<%} %>
+		
 		
 		<br>
 		

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "Share">
+ 	<insert id = "insertShare" parameterType="Share">
+		insert into tech_share_board values(boardNo.nextval, #{title}, #{contents}, #{authorId}, #{comments}, #{views}, sysdate)
+	</insert>
+	
+	<select id = "selectLastShare" resultType="Integer">
+		select max(id) from tech_share_board
+	</select>
+</mapper>

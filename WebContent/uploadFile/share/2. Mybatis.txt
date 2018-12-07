@@ -1,0 +1,47 @@
+
+
+@ Mybatis
+-> 데이터의 입력, 조회, 수정, 삭제(CRUD)를 보다 편하게 구현하기 위해 
+xml로 구조화하여 Mapper 설정 파일을 통해서 JDBC를 구현한 영속성 프레임 워크
+-> 기존에 JDBC를 통해 구현했던 상당 부분의 코드와 파라미터 설정 및 결과 매핑을 xml 설정을 통해 쉽게 구현할 수 있게 해줌
+
+
+※ Mybatis API 사이트
+-> http://www.mybatis.org/mybatis-3/ko
+
+@ Mybatis의 사용
+-> 이전 JDBC Template을 통해 DB에 접근 및 SQL 실행을 하였다면 JDBC코드를 Mybatis 전용 라이브러리를 통해 코드를 대체하여 작동함
+
+
+@ Mybatis 라이브러리 다운 및 연동
+-> https://github.com/mybatis/mybatis-3/releases
+
+
+@ ibatis 와 Mybatis
+-> 기존 Apache Project에서 ibatis를 운영하던 팀이 2010년 5월 9일 Google팀으로 이동하면서 Mybatis로 이름을 변경하였음
+-> Mybatis는 기존의 ibatis의 한계점이었던 동적 쿼리와 어노테이션 처리를 보강하여 더 나은 기능을 제공하고 있음
+-> ibatis는 현재 비활성화 상태이며, 기존에 ibatis로 만들어진 애플리케이션의 지원을 위한 라이브러리만 제공하고 있음
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

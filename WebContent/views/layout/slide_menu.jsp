@@ -27,7 +27,7 @@
 					<li class="nav-item"><a class="nav-link" href="/views/support/supportList.jsp">
 							<span data-feather="file"></span> 기술지원
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/views/share/shareList.jsp"> <span
+					<li class="nav-item"><a class="nav-link" href="/shareList.do"> <span
 							data-feather="file"></span> 기술공유
 					</a></li>
 				</ul>
